@@ -2,6 +2,7 @@ package com.example.demospring;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +17,8 @@ public class HomeController {
     }
 
     @RequestMapping("add")
-    public String add(HttpServletRequest req ){
-        int i1 = Integer.parseInt(req.getParameter("num1"));
-        int i2 = Integer.parseInt(req.getParameter("num2"));
-        int num3 = i1 + i2;
-
-        HttpSession session = req.getSession();
+    public String add(@RequestParam("num1") int i, @RequestParam("num2")int j, HttpSession session){
+        int num3 = i+j;
         session.setAttribute("num3",num3);
         return "result.jsp";
     }
