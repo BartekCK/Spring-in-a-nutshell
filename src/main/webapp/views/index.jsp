@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="addAlien">
+    <form action="addAlien" method="post">
         Enter your id : <input type="text" name="id"><br>
         Enter your name : <input type="text" name="name"><br>
         <input type="submit"/>
