@@ -4,6 +4,7 @@ import com.example.demospring.model.Alien;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,12 +25,7 @@ public class HomeController {
     }
 
     @RequestMapping("addAlien")
-    public String addAlien(@RequestParam("id") int id, @RequestParam("name")String name, Model model){
-        Alien alien = new Alien();
-        alien.setId(id);
-        alien.setName(name);
-
-        model.addAttribute("alien",alien);
+    public String addAlien(@ModelAttribute("a1") Alien alien){
         return "result";
     }
 }

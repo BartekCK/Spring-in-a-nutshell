@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-    Result is: ${alien}
+    Result is: ${a1}
 
 </body>
 </html>
