@@ -7,7 +7,9 @@
     <title>Title</title>
 </head>
 <body>
-    Result is: ${a1}
+    Result is: ${a1}<br>
+
+    Welcome back ${name}
 
 </body>
 </html>
