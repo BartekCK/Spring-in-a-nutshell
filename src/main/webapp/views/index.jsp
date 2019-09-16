@@ -7,9 +7,9 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="add">
-        Enter 1st number : <input type="text" name="num1"><br>
-        Enter 2st number : <input type="text" name="num2"><br>
+    <form action="addAlien">
+        Enter your id : <input type="text" name="id"><br>
+        Enter your name : <input type="text" name="name"><br>
         <input type="submit"/>
     </form>
 

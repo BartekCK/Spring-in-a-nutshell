@@ -1,11 +1,11 @@
 package com.example.demospring;
 
+import com.example.demospring.model.Alien;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -20,6 +20,16 @@ public class HomeController {
     public String add(@RequestParam("num1") int i, @RequestParam("num2")int j, ModelMap m){
 
         m.addAttribute("num3",i+j);
+        return "result";
+    }
+
+    @RequestMapping("addAlien")
+    public String addAlien(@RequestParam("id") int id, @RequestParam("name")String name, Model model){
+        Alien alien = new Alien();
+        alien.setId(id);
+        alien.setName(name);
+
+        model.addAttribute("alien",alien);
         return "result";
     }
 }
