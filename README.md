@@ -78,3 +78,34 @@ Add dependencies to pom.xml
         return mv;
     }
 ```
+
+## 6. Prefix and Suffix
+
+Changes in application.properties
+
+```
+spring.mvc.view.prefix= /views/
+spring.mvc.view.suffix= .jsp
+```
+
+## 7. Model
+
+```java
+@RequestMapping("/add")
+public String add(@RequestParam("num1") int i1, @RequestParam("num2") int i2, Model model)
+{
+    model.addAttribute("num3",i1 + i2);
+    return "result";
+}
+```
+
+## 8. ModelMap
+
+```java
+@RequestMapping("/add")
+    public String add(@RequestParam("num1") int i1, @RequestParam("num2") int i2, ModelMap model)
+    {
+        model.addAttribute("num3",i1 + i2);
+        return "result";
+    }
+```
