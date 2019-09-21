@@ -13,5 +13,11 @@
         <input type="submit"/>
     </form>
 
+    <hr>
+    <form action="getAlien" method="get">
+        Enter your id : <input type="text" name="id"><br>
+        <input type="submit"/>
+    </form>
+
 </body>
 </html>

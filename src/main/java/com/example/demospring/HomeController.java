@@ -33,8 +33,15 @@ public class HomeController {
         return "showAliens";
     }
 
+    @GetMapping("getAlien")
+    public String getAlien(@RequestParam int id, Model m){
+        m.addAttribute("result",repo.getOne(id));
+        return "showAliens";
+    }
+
     @PostMapping("addAlien")
     public String addAlien(@ModelAttribute("a1") Alien alien){
+        repo.save(alien);
         return "result";
     }
 }
