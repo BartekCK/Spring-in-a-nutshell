@@ -1,9 +1,17 @@
 package com.example.demospring.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Alien {
 
+    @Id
     private int id;
     private String name;
+
+    public Alien() {
+    }
 
     public Alien(int id, String name) {
         this.id = id;
