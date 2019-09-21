@@ -15,7 +15,13 @@
 
     <hr>
     <form action="getAlien" method="get">
-        Enter your id : <input type="text" name="id"><br>
+        Enter your id : <input type="text" name="id2"><br>
+        <input type="submit"/>
+    </form>
+
+    <hr>
+    <form action="getAlienByName" method="get">
+        Enter your name : <input type="text" name="name2"><br>
         <input type="submit"/>
     </form>
 
