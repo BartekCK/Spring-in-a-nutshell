@@ -163,3 +163,117 @@ public String add(@RequestParam("num1") int i1, @RequestParam("num2") int i2, Mo
         return "result2";
     }
 ```
+
+## 13. Add ORM configuration
+
+```
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>2.1.8.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.17</version>
+        </dependency>
+```
+
+#### ===============================
+#### = DATA SOURCE
+#### ===============================
+
+#### Set here configurations for the database connection
+
+#### Connection url for the database "netgloo_blog"
+spring.datasource.url = jdbc:mysql://localhost:3306/netgloo_blog?useSSL=false
+
+#### Username and password
+spring.datasource.username = root
+spring.datasource.password = root
+
+#### Keep the connection alive if idle for a long time (needed in production)
+spring.datasource.testWhileIdle = true
+spring.datasource.validationQuery = SELECT 1
+
+#### ===============================
+#### = JPA / HIBERNATE
+#### ===============================
+
+#### Use spring.jpa.properties.* for Hibernate native properties (the prefix is
+#### stripped before adding them to the entity manager).
+
+#### Show or not log for each sql query
+spring.jpa.show-sql = true
+
+#### Hibernate ddl auto (create, create-drop, update): with "update" the database
+#### schema will be automatically updated accordingly to java entities found in
+#### the project
+spring.jpa.hibernate.ddl-auto = update
+
+#### Naming strategy
+spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
+
+#### Allows Hibernate to generate SQL optimized for a particular DBMS
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
+
+## 14. JPArepository fetchAll
+
+public interface AlienRepo extends JpaRepository<Alien,Integer> {
+}
+
+```java
+@Controller
+public class HomeController {
+
+    @Autowired
+    AlienRepo repo;
+
+    @GetMapping("/getAliens")
+    public String getAliens(Model m){
+        m.addAttribute("result",repo.findAll());
+        return "result";
+    }
+}
+```
+
+## 15. JPArepository add and fetch
+
+```java
+@PostMapping("/addAlien")
+    public String addAlien(@ModelAttribute Alien alien, Model m)
+    {
+        m.addAttribute("result",alien);
+        repo.save(alien);
+        return "result";
+    }
+    
+@GetMapping("/getAlien")
+    public String getAlien(@RequestParam int id, Model m){
+        m.addAttribute("result", repo.getOne(id));
+        return "result";
+}
+```
+
+## 16. Query DSL 
+
+```java
+public interface AlienRepo extends JpaRepository<Alien,Integer> {
+
+    Alien findByName(String name);
+}
+
+@GetMapping("/getAlien")
+    public String getAlien(@RequestParam String name, Model m){
+        m.addAttribute("result", repo.findByName(name));
+        return "result";
+    }
+```
+
+## 17. Query Annotations
+
+```java
+    @Query("from Alien where name = :name")
+    Alien findAlienByTheBestParameter(@Param("name") String name);
+```
