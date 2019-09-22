@@ -179,7 +179,7 @@ public String add(@RequestParam("num1") int i1, @RequestParam("num2") int i2, Mo
             <version>8.0.17</version>
         </dependency>
 ```
-
+```
 #### ===============================
 #### = DATA SOURCE
 #### ===============================
@@ -217,13 +217,14 @@ spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
 
 #### Allows Hibernate to generate SQL optimized for a particular DBMS
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
+```
 
 ## 14. JPArepository fetchAll
 
+```java
 public interface AlienRepo extends JpaRepository<Alien,Integer> {
 }
 
-```java
 @Controller
 public class HomeController {
 
