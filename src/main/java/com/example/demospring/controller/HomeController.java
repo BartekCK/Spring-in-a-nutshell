@@ -1,5 +1,6 @@
-package com.example.demospring;
+package com.example.demospring.controller;
 
+import com.example.demospring.AlienRepo;
 import com.example.demospring.model.Alien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
