@@ -278,3 +278,18 @@ public interface AlienRepo extends JpaRepository<Alien,Integer> {
     @Query("from Alien where name = :name")
     Alien findAlienByTheBestParameter(@Param("name") String name);
 ```
+## 18.RequestParm and PathVariable 
+
+```java
+@PostMapping("/alien")
+public void addAlien(@RequestParam String name){
+    Alien alien = new Alien();
+    alien.setName(name);
+    alienRepo.save(alien);
+}
+
+@GetMapping("aliens/{id}")
+public Alien getAlien(@PathVariable("id") int id){
+    return alienRepo.findById(id).get();
+}
+```
