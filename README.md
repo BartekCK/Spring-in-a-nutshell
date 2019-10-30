@@ -425,3 +425,26 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 }
 ```
+## 21.BCrypt
+
+```java
+@Configuration
+@EnableWebSecurity
+public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private MyUserDetailsService userDetailsService;
+
+    public AppSecurityConfig(MyUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+
+    @Bean
+    public AuthenticationProvider authProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(new BCryptPasswordEncoder());
+        return provider;
+    }
+}
+```
