@@ -332,3 +332,96 @@ Configuration output file:
 logging.level.root = info
 logging.file=app.log
 ```
+
+## 20.UserDetailsService, UserDetails
+
+First I made the ordinary User.
+
+```java
+@Configuration
+@EnableWebSecurity
+public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private MyUserDetailsService userDetailsService;
+
+    public AppSecurityConfig(MyUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+
+    @Bean
+    public AuthenticationProvider authProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        return provider;
+    }
+}
+```
+
+```java
+public class UserPrincipal implements UserDetails {
+
+    private User user;
+
+    public UserPrincipal(User user){
+        this.user = user;
+    };
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+    }
+
+    @Override
+    public String getPassword() {
+        return user.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}
+```
+
+```java
+@Service
+public class MyUserDetailsService implements UserDetailsService {
+
+    private UserRepository userRepository;
+
+    public MyUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if(user==null)
+            throw new UsernameNotFoundException("User not found");
+        return new UserPrincipal(user);
+    }
+}
+```
