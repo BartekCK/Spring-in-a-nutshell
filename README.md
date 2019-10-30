@@ -285,11 +285,11 @@ public interface AlienRepo extends JpaRepository<Alien,Integer> {
 public void addAlien(@RequestParam String name){
     Alien alien = new Alien();
     alien.setName(name);
-    alienRepo.save(alien);
+    alenRepository.save(alien);
 }
 
 @GetMapping("aliens/{id}")
 public Alien getAlien(@PathVariable("id") int id){
-    return alienRepo.findById(id).get();
+    return alenRepository.findById(id).get();
 }
 ```

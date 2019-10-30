@@ -1,32 +1,32 @@
 package com.example.demospring.controller;
 
-import com.example.demospring.AlienRepo;
+import com.example.demospring.reposiotry.AlienRepository;
 import com.example.demospring.model.Alien;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AlienController {
 
-    private AlienRepo alienRepo;
+    private AlienRepository alienRepository;
 
-    public AlienController(AlienRepo alienRepo) {
-        this.alienRepo = alienRepo;
+    public AlienController(AlienRepository alienRepository) {
+        this.alienRepository = alienRepository;
     }
 
     @GetMapping("/aliens")
     public Iterable<Alien> getAliens(){
-        return alienRepo.findAll();
+        return alienRepository.findAll();
     }
 
     @PostMapping("/alien")
     public void addAlien(@RequestParam String name){
         Alien alien = new Alien();
         alien.setName(name);
-        alienRepo.save(alien);
+        alienRepository.save(alien);
     }
 
     @GetMapping("aliens/{id}")
     public Alien getAlien(@PathVariable("id") int id){
-        return alienRepo.findById(id).get();
+        return alienRepository.findById(id).get();
     }
 }
